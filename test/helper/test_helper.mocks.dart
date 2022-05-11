@@ -2,20 +2,27 @@
 // in first_project/test/helper/test_helper.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i6;
-import 'dart:convert' as _i10;
-import 'dart:typed_data' as _i11;
+import 'dart:async' as _i7;
+import 'dart:convert' as _i14;
+import 'dart:typed_data' as _i15;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:first_project/core/error/failures.dart' as _i7;
+import 'package:first_project/core/error/failures.dart' as _i8;
+import 'package:first_project/core/platform/network_info.dart' as _i12;
+import 'package:first_project/features/number_trivia/data/datasources/number_trivia_local_data_source.dart'
+    as _i11;
+import 'package:first_project/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart'
+    as _i10;
+import 'package:first_project/features/number_trivia/data/models/number_trivia_model.dart'
+    as _i3;
 import 'package:first_project/features/number_trivia/domain/enitities/number_trivia.dart'
-    as _i8;
+    as _i9;
 import 'package:first_project/features/number_trivia/domain/repositories/number_trivia_repository.dart'
-    as _i5;
-import 'package:http/src/base_request.dart' as _i12;
-import 'package:http/src/client.dart' as _i9;
-import 'package:http/src/response.dart' as _i3;
-import 'package:http/src/streamed_response.dart' as _i4;
+    as _i6;
+import 'package:http/src/base_request.dart' as _i16;
+import 'package:http/src/client.dart' as _i13;
+import 'package:http/src/response.dart' as _i4;
+import 'package:http/src/streamed_response.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -30,112 +37,175 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-class _FakeResponse_1 extends _i1.Fake implements _i3.Response {}
+class _FakeNumberTriviaModel_1 extends _i1.Fake
+    implements _i3.NumberTriviaModel {}
 
-class _FakeStreamedResponse_2 extends _i1.Fake implements _i4.StreamedResponse {
+class _FakeResponse_2 extends _i1.Fake implements _i4.Response {}
+
+class _FakeStreamedResponse_3 extends _i1.Fake implements _i5.StreamedResponse {
 }
 
 /// A class which mocks [NumberTriviaRespository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaRespository extends _i1.Mock
-    implements _i5.NumberTriviaRespository {
+    implements _i6.NumberTriviaRespository {
   MockNumberTriviaRespository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>> getConcreteNumberTrivia(
+  _i7.Future<_i2.Either<_i8.Failure, _i9.NumberTrivia>> getConcreteNumberTrivia(
           int? number) =>
       (super.noSuchMethod(Invocation.method(#getConcreteNumberTrivia, [number]),
-          returnValue: Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>.value(
-              _FakeEither_0<_i7.Failure, _i8.NumberTrivia>())) as _i6
-          .Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>);
+          returnValue: Future<_i2.Either<_i8.Failure, _i9.NumberTrivia>>.value(
+              _FakeEither_0<_i8.Failure, _i9.NumberTrivia>())) as _i7
+          .Future<_i2.Either<_i8.Failure, _i9.NumberTrivia>>);
   @override
-  _i6.Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>
+  _i7.Future<_i2.Either<_i8.Failure, _i9.NumberTrivia>>
       getRandomNumberTrivia() =>
           (super.noSuchMethod(Invocation.method(#getRandomNumberTrivia, []),
                   returnValue:
-                      Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>.value(
-                          _FakeEither_0<_i7.Failure, _i8.NumberTrivia>()))
-              as _i6.Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>);
+                      Future<_i2.Either<_i8.Failure, _i9.NumberTrivia>>.value(
+                          _FakeEither_0<_i8.Failure, _i9.NumberTrivia>()))
+              as _i7.Future<_i2.Either<_i8.Failure, _i9.NumberTrivia>>);
+}
+
+/// A class which mocks [NumberTriviaRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNumberTriviaRemoteDataSource extends _i1.Mock
+    implements _i10.NumberTriviaRemoteDataSource {
+  MockNumberTriviaRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.Future<_i3.NumberTriviaModel> getConcreteNumberTrivia(int? number) =>
+      (super.noSuchMethod(Invocation.method(#getConcreteNumberTrivia, [number]),
+              returnValue: Future<_i3.NumberTriviaModel>.value(
+                  _FakeNumberTriviaModel_1()))
+          as _i7.Future<_i3.NumberTriviaModel>);
+  @override
+  _i7.Future<_i3.NumberTriviaModel> getRandomNumberTrivia() =>
+      (super.noSuchMethod(Invocation.method(#getRandomNumberTrivia, []),
+              returnValue: Future<_i3.NumberTriviaModel>.value(
+                  _FakeNumberTriviaModel_1()))
+          as _i7.Future<_i3.NumberTriviaModel>);
+}
+
+/// A class which mocks [NumberTriviaLocalDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNumberTriviaLocalDataSource extends _i1.Mock
+    implements _i11.NumberTriviaLocalDataSource {
+  MockNumberTriviaLocalDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.Future<_i3.NumberTriviaModel> getLastNumberTrivia() =>
+      (super.noSuchMethod(Invocation.method(#getLastNumberTrivia, []),
+              returnValue: Future<_i3.NumberTriviaModel>.value(
+                  _FakeNumberTriviaModel_1()))
+          as _i7.Future<_i3.NumberTriviaModel>);
+  @override
+  _i7.Future<void> cacheNumberTrivia(_i3.NumberTriviaModel? triviaToCache) =>
+      (super.noSuchMethod(
+          Invocation.method(#cacheNumberTrivia, [triviaToCache]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
+}
+
+/// A class which mocks [NetworkInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNetworkInfo extends _i1.Mock implements _i12.NetworkInfo {
+  MockNetworkInfo() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.Future<bool> get isConnected =>
+      (super.noSuchMethod(Invocation.getter(#isConnected),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
 }
 
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClient extends _i1.Mock implements _i9.Client {
+class MockHttpClient extends _i1.Mock implements _i13.Client {
   MockHttpClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i3.Response> head(Uri? url, {Map<String, String>? headers}) =>
+  _i7.Future<_i4.Response> head(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#head, [url], {#headers: headers}),
-              returnValue: Future<_i3.Response>.value(_FakeResponse_1()))
-          as _i6.Future<_i3.Response>);
+              returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
+          as _i7.Future<_i4.Response>);
   @override
-  _i6.Future<_i3.Response> get(Uri? url, {Map<String, String>? headers}) =>
+  _i7.Future<_i4.Response> get(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#get, [url], {#headers: headers}),
-              returnValue: Future<_i3.Response>.value(_FakeResponse_1()))
-          as _i6.Future<_i3.Response>);
+              returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
+          as _i7.Future<_i4.Response>);
   @override
-  _i6.Future<_i3.Response> post(Uri? url,
+  _i7.Future<_i4.Response> post(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i10.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#post, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i3.Response>.value(_FakeResponse_1()))
-          as _i6.Future<_i3.Response>);
+              returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
+          as _i7.Future<_i4.Response>);
   @override
-  _i6.Future<_i3.Response> put(Uri? url,
+  _i7.Future<_i4.Response> put(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i10.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#put, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i3.Response>.value(_FakeResponse_1()))
-          as _i6.Future<_i3.Response>);
+              returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
+          as _i7.Future<_i4.Response>);
   @override
-  _i6.Future<_i3.Response> patch(Uri? url,
+  _i7.Future<_i4.Response> patch(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i10.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#patch, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i3.Response>.value(_FakeResponse_1()))
-          as _i6.Future<_i3.Response>);
+              returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
+          as _i7.Future<_i4.Response>);
   @override
-  _i6.Future<_i3.Response> delete(Uri? url,
+  _i7.Future<_i4.Response> delete(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i10.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#delete, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i3.Response>.value(_FakeResponse_1()))
-          as _i6.Future<_i3.Response>);
+              returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
+          as _i7.Future<_i4.Response>);
   @override
-  _i6.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
+  _i7.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
-          returnValue: Future<String>.value('')) as _i6.Future<String>);
+          returnValue: Future<String>.value('')) as _i7.Future<String>);
   @override
-  _i6.Future<_i11.Uint8List> readBytes(Uri? url,
+  _i7.Future<_i15.Uint8List> readBytes(Uri? url,
           {Map<String, String>? headers}) =>
       (super.noSuchMethod(
               Invocation.method(#readBytes, [url], {#headers: headers}),
-              returnValue: Future<_i11.Uint8List>.value(_i11.Uint8List(0)))
-          as _i6.Future<_i11.Uint8List>);
+              returnValue: Future<_i15.Uint8List>.value(_i15.Uint8List(0)))
+          as _i7.Future<_i15.Uint8List>);
   @override
-  _i6.Future<_i4.StreamedResponse> send(_i12.BaseRequest? request) =>
+  _i7.Future<_i5.StreamedResponse> send(_i16.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]),
               returnValue:
-                  Future<_i4.StreamedResponse>.value(_FakeStreamedResponse_2()))
-          as _i6.Future<_i4.StreamedResponse>);
+                  Future<_i5.StreamedResponse>.value(_FakeStreamedResponse_3()))
+          as _i7.Future<_i5.StreamedResponse>);
   @override
   void close() => super.noSuchMethod(Invocation.method(#close, []),
       returnValueForMissingStub: null);
